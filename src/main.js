@@ -10,9 +10,18 @@ const sizes = {
 };
 
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xffcdc9);
 const camera = new THREE.PerspectiveCamera( 75, sizes.width / sizes.height, 0.1, 1000 );
-const light = new THREE.AmbientLight( 0xfcf8c7, 20 ); // soft white light
-scene.add( light );
+const ambientlight = new THREE.AmbientLight( 0xfcf8c7, 2 ); // soft white light
+const pointLight = new THREE.PointLight( 0xf5a556, 150, 500 );
+pointLight.position.set( 0, 5, 5 );
+scene.add( pointLight );
+scene.add( ambientlight );
+
+const sphereSize = 1;
+const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
+scene.add( pointLightHelper );
+
 
 const loader = new GLTFLoader();
 loader.load("/models/MeatMyRequests.glb", (glb) => {
@@ -25,12 +34,9 @@ renderer.setPixelRatio( Math.min( window.devicePixelRatio, 2 ) );
 
 const controls = new OrbitControls( camera, renderer.domElement );
 
-// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// const cube = new THREE.Mesh( geometry, material );
-// scene.add( cube );
 
 camera.position.z = 5;
+camera.position.y = 5;
 controls.update();
 
 // event listeners 
@@ -50,8 +56,6 @@ window.addEventListener('resize', () => {
 });
 
 const render = () => {
-  // cube.rotation.x += 0.01;
-  // cube.rotation.y += 0.01;
   controls.update();
   renderer.render( scene, camera );
   window.requestAnimationFrame( render );
