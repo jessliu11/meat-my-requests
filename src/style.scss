@@ -50,3 +50,30 @@
   max-width: 30%;
   text-align: center;
 }
+
+#meat-panels-container {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+}
+.meat-panel {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  max-width: 30%;
+  text-align: center;
+
+  img {
+    width: 80px;
+    height: 80px;
+    display: block;
+    margin: 0 auto 10px;
+  }
+}
