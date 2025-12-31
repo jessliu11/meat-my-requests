@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>meat-my-requests</title>
+  </head>
+  <body>
+    <div id="app">
+        <div class="persona-column">
+            <div class="text-panels-container">
+                <div class="persona-panel" id="manager-panel">
+                    <h2>Manager</h2> <img src="/img/profile.jpg" alt="Manager" class="manager">
+                    <p>Manager: Must sell at least 4 patties</p>
+                </div>
+                <div class="persona-panel" id="customer-panel">
+                    <h2>Customer</h2> <img src="/img/profile.jpg" alt="Customer" class="customer">
+                    <p>Customer: Want 15 pounds of any meat, at least 1 has to be sausage</p>
+                </div>
+                <div class="persona-panel" id="salesman-panel">
+                    <h2>Salesman</h2> <img src="/img/profile.jpg" alt="Salesman" class="salesman">
+                    <p>Salesman: You must leave 2 chicken for me to give out as free samples</p>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="inventory-column">
+            <div class="text-panels-container">
+                <div id="patty" class="inventory-panel">
+                    <div class="meat-panel-title">
+                        patty
+                        <span class="meat-panel-price-per-lb">$2.50/lb</span>
+                        <div class="meat-panel-available">
+                            Available: <span id="patty-available">20 lb</span>
+                        </div>
+                        <div class="meat-panel-remaining">
+                            Remaining: <span id="patty-remaining">20 lb</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="sausage" class="inventory-panel">
+                    <div class="meat-panel-title">
+                        sausage
+                        <span class="meat-panel-price-per-lb">$2.50/lb</span>
+                        <div class="meat-panel-available">
+                            Available: <span id="sausage-available">20 lb</span>
+                        </div>
+                        <div class="meat-panel-remaining">
+                            Remaining: <span id="sausage-remaining">20 lb</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="chicken-wing" class="inventory-panel">
+                    <div class="meat-panel-title">
+                        chicken wing
+                        <span class="meat-panel-price-per-lb">$2.50/lb</span>
+                        <div class="meat-panel-available">
+                            Available: <span id="chicken-wing-available">20 lb</span>
+                        </div>
+                        <div class="meat-panel-remaining">
+                            Remaining: <span id="chicken-wing-remaining">20 lb</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="chicken-thigh" class="inventory-panel">
+                    <div class="meat-panel-title">
+                        chicken thigh
+                        <span class="meat-panel-price-per-lb">$2.50/lb</span>
+                        <div class="meat-panel-available">
+                            Available: <span id="chicken-thigh-available">20 lb</span>
+                        </div>
+                        <div class="meat-panel-remaining">
+                            Remaining: <span id="chicken-thigh-remaining">20 lb</span>
+                        </div>
+                    </div>
+                </div>    
+                <div id="steak" class="inventory-panel">
+                    <div class="meat-panel-title">
+                        steak
+                        <span class="meat-panel-price-per-lb">$2.50/lb</span>
+                        <div class="meat-panel-available">
+                            Available: <span id="steak-available">20 lb</span>
+                        </div>
+                        <div class="meat-panel-remaining">
+                            Remaining: <span id="steak-remaining">20 lb</span>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+        </div>
+
+
+        <div class="meat-column">
+            <div class="text-panels-container">
+                <div id="patty" class="meat-panel"> 
+                    <img src="/img/patty.png" alt="Patty"> 
+                    <div class="order-meat">
+                        <span class="minus-sign">-</span> <span class="patty-ordered">5</span>  <span class="plus-sign">+</span> 
+                    </div>
+                    
+                </div>
+                <div id="sausage" class="meat-panel"> <img src="/img/sausage.png" alt="Sausage"> sausage - $7, 3 lb </div>
+                <div id="chicken-wing" class="meat-panel"> <img src="/img/chicken-wing.png" alt="Chicken Wing"> chicken wing - $4, 2 lb </div>
+                <div id="chicken-thigh" class="meat-panel"> <img src="/img/chicken-thigh.png" alt="Chicken Thigh"> chicken thigh - $3, 4 lb </div>  
+                <div id="steak" class="meat-panel"> <img src="/img/steak.png" alt="Steak"> steak - $10, 5 lb </div>    
+            </div>
+        </div>
+    </div>
+      
+
+    <div id="experience">
+      <canvas id="experience-canvas" class="experience-canvas"></canvas>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
