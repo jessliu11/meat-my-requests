@@ -56,6 +56,15 @@ const state = {
         }
     }
 };
+// prices display
+for (const meat of MEATS){
+    // set up initial prices in the UI
+
+    const priceSpan = document.getElementById(`${meat}-price`);
+    if (priceSpan){
+        priceSpan.textContent  = `$${state.round.prices[meat].toFixed(2)} / lb`;
+    }
+}
 
 function setSell(meat, newValue) {
     const available = state.round.inventory[meat];
@@ -76,6 +85,7 @@ function changeSell(meat, delta) {
 function remainingMeat(meat) {
     return state.round.inventory[meat] - state.plan.sell[meat];
 }
+
 
 function updateUI(){
     for (const meat of MEATS){
