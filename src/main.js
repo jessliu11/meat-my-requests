@@ -2,17 +2,9 @@ import './style.scss'
 
 // MEATS list 
 const MEATS = [
-    "patty", "sausage", "chickenWing", "chickenThigh","steak"
+    "patty", "sausage", "wing", "thigh","steak"
 ];
 
-// map to convert from DOM element IDs to meat types
-const DOM_TO_MEAT = {
-    "patty": "patty",
-    "sausage": "sausage",
-    "chicken-wing": "chickenWing",
-    "chicken-thigh": "chickenThigh",
-    "steak": "steak"
-};
 
 const state = {
     round: {
@@ -20,16 +12,16 @@ const state = {
             // price per pound (randomized each round)
             patty: 2.50,
             sausage: 3.10,
-            chickenWing: 1.90,
-            chickenThigh: 2.20,
+            wing: 1.90,
+            thigh: 2.20,
             steak: 9.75
         },
         // available meats this round
         inventory: {
             patty: 4,
             sausage: 12,
-            chickenWing: 18,
-            chickenThigh: 15,
+            wing: 18,
+            thigh: 15,
             steak: 3
         },
         requests: [
@@ -41,7 +33,7 @@ const state = {
         {
             persona: "customer",
             type: "SELL_MEAT_WEIGHT_AT_LEAST",
-            meat: "chickenWing",
+            meat: "wing",
             target: 5 // pounds
         },
         {
@@ -52,14 +44,14 @@ const state = {
         }
     ],
     roundNumber: 1
-},
+    },
     // persona's requested meats this round
     plan: {
         sell: {
             patty: 0,
             sausage: 0,
-            chickenWing: 0, 
-            chickenThigh: 0,
+            wing: 0, 
+            thigh: 0,
             steak: 0
         }
     }
@@ -78,17 +70,64 @@ function changeSell(meat, delta) {
     const current = state.plan.sell[meat];
 
     setSell(meat, current + delta);
+    updateUI(); // update the UI after changing
 }
 
 function remainingMeat(meat) {
     return state.round.inventory[meat] - state.plan.sell[meat];
 }
 
-function renderPatty(){
-    document.querySelectorAll('.patty-ordered').forEach(el => el.textContent = state.plan.sell.patty);
-    document.getElementById('patty-remaining').textContent = `${remainingMeat("patty")} lbs`;
+function updateUI(){
+    for (const meat of MEATS){
+        // ordered amount 
+        const orderedSpan = document.querySelector(`.${meat}-ordered`);
+        if (orderedSpan) {
+            orderedSpan.textContent = state.plan.sell[meat];
+        }
+
+        // available amount
+        const availableSpan = document.getElementById(`${meat}-available`);
+        if (availableSpan) {
+            availableSpan.textContent = `${state.round.inventory[meat]} lbs`;
+        }
+
+        // remaining amount
+        const remainingSpan = document.getElementById(`${meat}-remaining`);
+        if (remainingSpan) {
+            remainingSpan.textContent = `${remainingMeat(meat)} lbs`;
+        }
+    }
 }
 
 
 // click action
+const meatColumn = document.querySelector('.meat-column'); // selecting the meat column 
+
+meatColumn.addEventListener("click", (event) => {
+  console.log('Click event on meatColumn, target:', event.target, 'classes:', event.target.classList);
+  const clickedElement = event.target.closest('.plus-sign') || event.target.closest('.minus-sign');
+  if (!clickedElement) return;
+
+  const clickedPlus = clickedElement.classList.contains('plus-sign');
+  const clickedMinus = clickedElement.classList.contains('minus-sign');
+
+  console.log('clickedElement:', clickedElement, 'clickedPlus:', clickedPlus, 'clickedMinus:', clickedMinus);
+
+  const meatPanel = clickedElement.closest(".meat-panel");
+  console.log('meatPanel:', meatPanel);
+  if (!meatPanel) return;
+
+  const meat = meatPanel.dataset.meat;         // e.g. "patty"
+  console.log('meat:', meat);
+  if (!meat) return;
+
+  const delta = clickedPlus ? 1 : -1;
+
+  changeSell(meat, delta);
+  updateUI();
+});
+
+// initial paint
+updateUI();
+
 
