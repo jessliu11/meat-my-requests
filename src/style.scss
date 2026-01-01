@@ -89,6 +89,18 @@
   gap: 10px;
   overflow-y: auto;
 }
+// text panels
+.text-panels-container-persona {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  gap: 10px;
+  overflow-y: auto;
+}
 
 .persona-panel {
   display: flex;
