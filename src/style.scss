@@ -123,6 +123,19 @@
     padding: 2px;
 
   }
+
+  .status {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+
+  .met {
+    color: green;
+  }
+
+  .unmet {
+    color: red;
+  }
 }
 
 .meat-panel {
