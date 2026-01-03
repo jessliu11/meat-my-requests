@@ -31,18 +31,9 @@ function updatePersonaPanels(requestResults) {
     for (const persona of personas) {
         const panel = document.getElementById(`${persona}-panel`);
         if (panel) {
-            const statusElement = panel.querySelector('.status') || createStatusElement(panel);
-            statusElement.textContent = requestResults[persona] ? '✅' : '❌';
-            statusElement.className = `status ${requestResults[persona] ? 'met' : 'not met'}`;
+            panel.className = `persona-panel ${requestResults[persona] ? 'met' : 'unmet'}`;
         }
     }
-}
-
-function createStatusElement(panel) {
-    const status = document.createElement('span');
-    status.className = 'status';
-    panel.appendChild(status);
-    return status;
 }
 
 export function initializePrices() {
