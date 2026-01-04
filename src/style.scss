@@ -66,18 +66,44 @@
   flex: 1;
 
 }
+
   .inventory-column {
-  // border-width: 2px;
-  // border-style: solid;
   margin: 10px;
   padding: 10px;
-  //border-color: rgb(148, 148, 148);
+  flex: 2;
+  height: 100%;
+}
+
+
+.inventory-panel{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+  flex: 1;
+  text-align: left;
+
+  border-color: rgb(175, 175, 175);
+  border-style: solid;
+  border-width: 2px;
+
+  img {
+    width: 110px;
+    height: 110px;
+    display: block;
+    margin: 0 auto 10px;
+  }
+}
+.meat-panel-title{
+  flex: 3;
+}
+.meat-img{
   flex: 1;
 }
 
-.inventory-column {
-  flex: 2;
-}
 // text panels
 .text-panels-container {
   display: flex;
@@ -89,6 +115,7 @@
   width: 100%;
   gap: 10px;
   overflow-y: auto;
+
 }
 // text panels
 .text-panels-container-persona {
@@ -159,13 +186,14 @@
 }
 .order-meat {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  gap: 15px;
-  width: 100%;
-  flex: 1;
+  gap: 10px;
+  width: 50%;
+
+  flex: 0.5;
 
   .minus-sign, .plus-sign {
     background-color: #4CAF50;
@@ -185,18 +213,6 @@
   }
 }
 
-.inventory-panel{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 14px;
-  width: 100%;
-  flex: 1;
-  text-align: left;
 
-  border-color: rgb(175, 175, 175);
-  border-style: solid;
-  border-width: 2px;
-}
+
+

@@ -12,15 +12,15 @@
             <div class="text-panels-container-persona">
                 <div class="persona-panel" id="manager-panel">
                     <h2>Manager</h2> <img src="/img/manager.png" alt="Manager" class="manager">
-                    <p>Manager: Must sell a total of at least $30.</p>
+                    <p>You must sell a total of at least $30.</p>
                 </div>
                 <div class="persona-panel" id="customer-panel">
                     <h2>Customer</h2> <img src="/img/customer.png" alt="Customer" class="customer">
-                    <p>Customer: I want to buy at least 5 pounds of wings.</p>
+                    <p>I want to buy at least 5 pounds of wings.</p>
                 </div>
                 <div class="persona-panel" id="chef-panel">
                     <h2>Chef</h2> <img src="/img/chef.png" alt="Chef" class="chef">
-                    <p>Chef: You should keep at least 2 pounds of steak.</p>
+                    <p>You must keep at least 2 pounds of steak.</p>
                 </div>
             </div>
             
@@ -39,6 +39,12 @@
                             Remaining: <span id="patty-remaining"></span>
                         </div>
                     </div>
+                    <div class="meat-img">
+                        <img src="/img/patty.png" alt="Patty">
+                    </div>
+                    <div class="order-meat" data-meat="patty">
+                        <div class="plus-sign">+</div><div class="patty-ordered"></div> <div class="minus-sign">-</div> 
+                    </div>
                 </div>
                 <div id="sausage" class="inventory-panel">
                     <div class="meat-panel-title">
@@ -50,6 +56,12 @@
                         <div class="meat-panel-remaining">
                             Remaining: <span id="sausage-remaining">20 lb</span>
                         </div>
+                    </div>
+                    <div class="meat-img">
+                        <img src="/img/sausage.png" alt="Sausage">
+                    </div>
+                    <div class="order-meat" data-meat="sausage">
+                        <div class="plus-sign">+</div><div class="sausage-ordered"></div> <div class="minus-sign">-</div> 
                     </div>
                 </div>
                 <div id="wing" class="inventory-panel">
@@ -63,6 +75,12 @@
                             Remaining: <span id="wing-remaining">20 lb</span>
                         </div>
                     </div>
+                    <div class="meat-img">
+                        <img src="/img/wing.png" alt="Wing">
+                    </div>
+                    <div class="order-meat" data-meat="wing">
+                        <div class="plus-sign">+</div><div class="wing-ordered"></div> <div class="minus-sign">-</div> 
+                    </div>
                 </div>
                 <div id="thigh" class="inventory-panel">
                     <div class="meat-panel-title">
@@ -74,6 +92,12 @@
                         <div class="meat-panel-remaining">
                             Remaining: <span id="thigh-remaining">20 lb</span>
                         </div>
+                    </div>
+                    <div class="meat-img">
+                        <img src="/img/thigh.png" alt="Thigh">
+                    </div>
+                    <div class="order-meat" data-meat="thigh">
+                        <div class="plus-sign">+</div><div class="thigh-ordered"></div> <div class="minus-sign">-</div> 
                     </div>
                 </div>    
                 <div id="steak" class="inventory-panel">
@@ -87,6 +111,12 @@
                             Remaining: <span id="steak-remaining">20 lb</span>
                         </div>
                     </div>
+                    <div class="meat-img">
+                        <img src="/img/steak.png" alt="Steak">
+                    </div>
+                    <div class="order-meat" data-meat="steak">
+                        <div class="plus-sign">+</div><div class="steak-ordered"></div> <div class="minus-sign">-</div> 
+                    </div>
                 </div>   
             </div>
         </div>
@@ -96,9 +126,7 @@
             <div class="text-panels-container">
                 <div id="patty-action" data-meat="patty" class="meat-panel"> 
                     <img src="/img/patty.png" alt="Patty"> 
-                    <div class="order-meat">
-                        <span class="minus-sign">-</span> <span class="patty-ordered"></span>  <span class="plus-sign">+</span> 
-                    </div>
+                    
                 </div>
                 <div id="sausage-action" data-meat="sausage" class="meat-panel"> 
                     <img src="/img/sausage.png" alt="Sausage"> 
