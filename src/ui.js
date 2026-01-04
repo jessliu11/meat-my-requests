@@ -5,6 +5,8 @@ export function updateUI() {
     const derived = derivedState(state);
     const requestResults = evaluateRequests(state, derived)
 
+    updatePersonaRequests(state.round.requests);
+
     for (const meat of MEATS) {
         const orderedSpan = document.querySelector(`.${meat}-ordered`);
         if (orderedSpan) {
@@ -28,6 +30,32 @@ export function updateUI() {
     updateOrderSummary(derived);
 }
 
+function updatePersonaRequests(requests) {
+    for (const request of requests) {
+        const panel = document.getElementById(`${request.persona}-panel`);
+        if (!panel) continue;
+
+        let textEl = panel.querySelector('p');
+        if (!textEl) {
+            textEl = document.createElement('p');
+            panel.appendChild(textEl);
+        }
+        textEl.textContent = formatRequestText(request);
+    }
+}
+
+function formatRequestText(request) {
+    switch (request.type){
+        case "SELL_TOTAL_VALUE_AT_LEAST":
+            return `Sell at least $${request.target} total.`;
+        case "SELL_MEAT_WEIGHT_AT_LEAST":
+            return `Sell at least ${request.target} lbs of ${request.meat}.`;
+        case "KEEP_MEAT_WEIGHT_AT_LEAST":
+            return `Keep at least ${request.target} lbs of ${request.meat}.`;
+        default:
+            return "New request available.";
+    }
+}
 function updatePersonaPanels(requestResults) {
     const personas = ['manager', 'customer', 'chef'];
     for (const persona of personas) {

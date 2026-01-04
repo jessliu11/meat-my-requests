@@ -3,6 +3,7 @@ import './style.scss';
 import { MEATS } from './gameState.js';
 import { initializePrices, updateUI } from './ui.js';
 import { changeSell } from './gameLogic.js';
+import { startNewRound } from './startNewRound.js';
 
 // Initialize prices
 initializePrices();
@@ -27,7 +28,15 @@ inventoryColumn.addEventListener("click", (event) => {
 });
 
 // restart button listener
-const restartButton = document.getElementById('restart-button');
+document.getElementById('restart-button').addEventListener('click',()=>{
+    startNewRound();
+
+    // close success panel
+    const successPanel = document.querySelector('.success-panel');
+    if (successPanel) {
+        successPanel.style.display = 'none';
+    }
+})
 
 // Initial UI update
 updateUI();

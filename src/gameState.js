@@ -61,33 +61,6 @@ export function remainingMeat(meat) {
     return state.round.inventory[meat] - state.plan.sell[meat];
 }
 
-// export function derivedState(state){
-//     const derived = {
-//         totalPoundsSold: 0,
-//         totalRevenueSold: 0,
-//         remainingPounds: {},
-//         poundsSoldPerMeat: {},
-//         revenueSoldPerMeat: {},
-//         totalRemainingPounds: 0
-//     };
-
-//     for (const meat of MEATS) {
-//         const sold = state.plan.sell[meat];
-//         const price = state.round.prices[meat];
-//         const remaining = state.round.inventory[meat] - sold;
-
-//         derived.totalPoundsSold += sold;
-//         derived.totalRevenueSold += sold * price;
-//         derived.remainingPounds[meat] = remaining;
-//         derived.poundsSoldPerMeat[meat] = sold;
-//         derived.revenueSoldPerMeat[meat] = sold * price;
-//         derived.totalRemainingPounds += remaining;
-//         //console.log(derived.revenueSoldPerMeat[meat]);
-//     }
-    
-
-//     return derived;
-// }
 
 export function derivedState(state) {
   const derived = {
