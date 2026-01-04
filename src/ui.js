@@ -36,17 +36,15 @@ function updatePersonaPanels(requestResults) {
             panel.className = `persona-panel ${requestResults[persona] ? 'met' : 'unmet'}`;
         }
     }
+
+    // Show success panel if all requests are met
+    const allMet = personas.every(persona => requestResults[persona]);
+    const successPanel = document.querySelector('.success-panel');
+    if (successPanel) {
+        successPanel.style.display = allMet ? 'block' : 'none';
+    }
 }
 
-// function updateOrderSummary(derived) {
-//     for (const meat of MEATS) {
-//         const meatSummary = document.getElementById(`summary-${meat}-ordered`);
-//         if (meatSummary) {
-//             console.log(derived.revenueSoldPerMeat[meat]);
-//             meatSummary.textContent = `$${derivedState.revenueSoldPerMeat[meat]}, ${derivedState.poundsSoldPerMeat[meat]}lbs`;
-//         }
-//     }
-// }
 function updateOrderSummary(derived) {
   for (const meat of MEATS) {
     const summaryEl = document.getElementById(`summary-${meat}-ordered`);

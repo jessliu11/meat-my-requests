@@ -26,5 +26,8 @@ inventoryColumn.addEventListener("click", (event) => {
     changeSell(meat, delta);
 });
 
+// restart button listener
+const restartButton = document.getElementById('restart-button');
+
 // Initial UI update
 updateUI();
