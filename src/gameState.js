@@ -61,29 +61,71 @@ export function remainingMeat(meat) {
     return state.round.inventory[meat] - state.plan.sell[meat];
 }
 
-export function derivedState(state){
-    const derived = {
-        totalPoundsSold: 0,
-        totalRevenueSold: 0,
-        remainingPounds: {},
-        revenueSoldPerMeat: {},
-        totalRemainingPounds: 0
+// export function derivedState(state){
+//     const derived = {
+//         totalPoundsSold: 0,
+//         totalRevenueSold: 0,
+//         remainingPounds: {},
+//         poundsSoldPerMeat: {},
+//         revenueSoldPerMeat: {},
+//         totalRemainingPounds: 0
+//     };
+
+//     for (const meat of MEATS) {
+//         const sold = state.plan.sell[meat];
+//         const price = state.round.prices[meat];
+//         const remaining = state.round.inventory[meat] - sold;
+
+//         derived.totalPoundsSold += sold;
+//         derived.totalRevenueSold += sold * price;
+//         derived.remainingPounds[meat] = remaining;
+//         derived.poundsSoldPerMeat[meat] = sold;
+//         derived.revenueSoldPerMeat[meat] = sold * price;
+//         derived.totalRemainingPounds += remaining;
+//         //console.log(derived.revenueSoldPerMeat[meat]);
+//     }
+    
+
+//     return derived;
+// }
+
+export function derivedState(state) {
+  const derived = {
+    totalPoundsSold: 0,
+    totalRevenueSold: 0,
+    totalRemainingPounds: 0,
+    totalRemainingValue: 0,
+    byMeat: {}
+  };
+
+  for (const meat of MEATS) {
+    const soldPounds = state.plan.sell[meat];
+    const pricePerPound = state.round.prices[meat];
+    const inventory = state.round.inventory[meat];
+
+    const remainingPounds = inventory - soldPounds;
+    const revenueSold = soldPounds * pricePerPound;
+    const remainingValue = remainingPounds * pricePerPound;
+
+    // totals
+    derived.totalPoundsSold += soldPounds;
+    derived.totalRevenueSold += revenueSold;
+    derived.totalRemainingPounds += remainingPounds;
+    derived.totalRemainingValue += remainingValue;
+
+    // per-meat breakdown
+    derived.byMeat[meat] = {
+      soldPounds,
+      pricePerPound,
+      revenueSold,
+      remainingPounds,
+      remainingValue
     };
+  }
 
-    for (const meat of MEATS) {
-        const sold = state.plan.sell[meat];
-        const price = state.round.prices[meat];
-        const remaining = state.round.inventory[meat] - sold;
-
-        derived.totalPoundsSold += sold;
-        derived.totalRevenueSold += sold * price;
-        derived.remainingPounds[meat] = remaining;
-        derived.revenueSoldPerMeat[meat] = sold * price;
-        derived.totalRemainingPounds += remaining;
-    }
-
-    return derived;
+  return derived;
 }
+
 
 export function evaluateRequests(state, derived) {
     const results = {};
@@ -98,7 +140,7 @@ export function evaluateRequests(state, derived) {
                 met = state.plan.sell[request.meat] >= request.target;
                 break;
             case "KEEP_MEAT_WEIGHT_AT_LEAST":
-                met = derived.remainingPounds[request.meat] >= request.target;
+                met = derived.byMeat[request.meat].remainingPounds >= request.target;
                 break;
             default:
                 met = false;

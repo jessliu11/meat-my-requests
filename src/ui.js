@@ -24,6 +24,8 @@ export function updateUI() {
 
     // update persona panels
     updatePersonaPanels(requestResults);
+    //update order summary
+    updateOrderSummary(derived);
 }
 
 function updatePersonaPanels(requestResults) {
@@ -34,6 +36,36 @@ function updatePersonaPanels(requestResults) {
             panel.className = `persona-panel ${requestResults[persona] ? 'met' : 'unmet'}`;
         }
     }
+}
+
+// function updateOrderSummary(derived) {
+//     for (const meat of MEATS) {
+//         const meatSummary = document.getElementById(`summary-${meat}-ordered`);
+//         if (meatSummary) {
+//             console.log(derived.revenueSoldPerMeat[meat]);
+//             meatSummary.textContent = `$${derivedState.revenueSoldPerMeat[meat]}, ${derivedState.poundsSoldPerMeat[meat]}lbs`;
+//         }
+//     }
+// }
+function updateOrderSummary(derived) {
+  for (const meat of MEATS) {
+    const summaryEl = document.getElementById(`summary-${meat}-ordered`);
+    if (!summaryEl) continue;
+
+    const meatData = derived.byMeat[meat];
+
+    summaryEl.textContent =
+      `$${meatData.revenueSold.toFixed(2)} , ${meatData.soldPounds} lbs`;
+  }
+
+    const totalAmountEl = document.getElementById("total-amount");
+    if (totalAmountEl) totalAmountEl.textContent = `$${derived.totalRevenueSold.toFixed(2)}`;
+
+    const totalLbsEl = document.getElementById("total-value");
+    if (totalLbsEl) totalLbsEl.textContent = `${derived.totalPoundsSold} lbs`;
+
+    const totalRemainingEl = document.getElementById("total-remaining");
+    if (totalRemainingEl) totalRemainingEl.textContent = `$${derived.totalRemainingValue.toFixed(2)}`;
 }
 
 export function initializePrices() {
