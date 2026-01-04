@@ -13,6 +13,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h2{
+  margin-bottom: 3px;
+}
 
 // experience
 
@@ -45,7 +48,7 @@
 }
 
 #app{
-  height: 80vh;
+  height: 90vh;
   width: 80vw;
   overflow: hidden;
   display: flex;
@@ -71,7 +74,6 @@
   margin: 10px;
   padding: 10px;
   flex: 2;
-  height: 100%;
 }
 
 
@@ -80,13 +82,14 @@
   flex-direction: row;
   align-items: stretch;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   font-size: 14px;
   width: 100%;
   flex: 1;
   text-align: left;
+  color: rgb(44, 44, 44);
 
-  border-color: rgb(175, 175, 175);
+  border-color: rgb(148, 148, 148);
   border-style: solid;
   border-width: 2px;
 
@@ -99,9 +102,13 @@
 }
 .meat-panel-title{
   flex: 3;
+  font: 18px Arial, sans-serif;
+  line-height: 1.4;
+  padding-left: 10px;
 }
 .meat-img{
   flex: 1;
+  
 }
 
 // text panels
@@ -177,12 +184,21 @@
   height: auto;
   text-align: center;
 
+
   img {
     width: 70px;
     height: 70px;
     display: block;
     margin: 0 auto 10px;
+
+    border-color: red;
+    border-style: solid;
+    border-width: 2px;
   }
+}
+.meat-column h2{
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 .order-meat {
   display: flex;
@@ -196,7 +212,7 @@
   flex: 0.5;
 
   .minus-sign, .plus-sign {
-    background-color: #4CAF50;
+    background-color: #303030;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -213,6 +229,69 @@
   }
 }
 
+.meat-summary-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  width: 70%;
+  //gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+
+  border-color: rgb(148, 148, 148);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 20px;
+}
+
+.meat-summary-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 16px;
+  padding: 1px;  width: 100%;
+
+  // border-color: red;
+  // border-style: solid;
+  // border-width: 2px;
+
+  img {
+    width: 70px;
+    height: 70px;
+    display: block;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    // border-color: red;
+    // border-style: solid;
+    // border-width: 2px;
+    
+  }
+}
+
+.summary-patty-ordered,
+.summary-sausage-ordered,
+.summary-wing-ordered,
+.summary-thigh-ordered,
+.summary-steak-ordered {
+  flex: 1;
+  text-align: center;
+}
+
+.total-summaries {
+  margin-top: 20px;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
 
 
 
+.total-amount-sold, .total-value-sold, .total-value-remaining{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
