@@ -8,153 +8,158 @@
   </head>
   <body>
     <div id="app">
-        <div class="persona-column">
-            <div class="text-panels-container-persona">
-                <div class="persona-panel" id="manager-panel">
-                    <h2>Manager</h2> <img src="/img/manager.png" alt="Manager" class="manager">
-                    <p>You must sell a total of at least $30.</p>
+        <section class = "mobile-personas">
+            <div class="persona-column">
+                <div class="text-panels-container-persona">
+                    <div class="persona-panel" id="manager-panel">
+                        <h2>Manager</h2> <img src="/img/manager.png" alt="Manager" class="manager">
+                        <p>You must sell a total of at least $30.</p>
+                    </div>
+                    <div class="persona-panel" id="customer-panel">
+                        <h2>Customer</h2> <img src="/img/customer.png" alt="Customer" class="customer">
+                        <p>I want to buy at least 5 pounds of wings.</p>
+                    </div>
+                    <div class="persona-panel" id="chef-panel">
+                        <h2>Chef</h2> <img src="/img/chef.png" alt="Chef" class="chef">
+                        <p>You must keep at least 2 pounds of steak.</p>
+                    </div>
                 </div>
-                <div class="persona-panel" id="customer-panel">
-                    <h2>Customer</h2> <img src="/img/customer.png" alt="Customer" class="customer">
-                    <p>I want to buy at least 5 pounds of wings.</p>
-                </div>
-                <div class="persona-panel" id="chef-panel">
-                    <h2>Chef</h2> <img src="/img/chef.png" alt="Chef" class="chef">
-                    <p>You must keep at least 2 pounds of steak.</p>
+             </div>
+        </section>
+        
+        <main class = "mobile-meats">
+            <div class="inventory-column">
+                <div class="text-panels-container">
+                    <div id="patty" class="inventory-panel">
+                        <div class="meat-panel-title">
+                            <h2>Patty</h2>
+                            <span id="patty-price" class="meat-panel-price-per-lb">$2.50/lb</span>
+                            <div class="meat-panel-available">
+                                Available: <span id="patty-available">20 lb</span>
+                            </div>
+                            <div class="meat-panel-remaining">
+                                Remaining: <span id="patty-remaining"></span>
+                            </div>
+                        </div>
+                        <div class="meat-img">
+                            <img src="/img/patty.png" alt="Patty">
+                        </div>
+                        <div class="order-meat" data-meat="patty">
+                            <div class="plus-sign">+</div><div class="patty-ordered"></div> <div class="minus-sign">-</div> 
+                        </div>
+                    </div>
+                    <div id="sausage" class="inventory-panel">
+                        <div class="meat-panel-title">
+                            <h2>Sausage</h2>
+                            <span id="sausage-price" class="meat-panel-price-per-lb">$2.50/lb</span>
+                            <div class="meat-panel-available">
+                                Available: <span id="sausage-available">20 lb</span>
+                            </div>
+                            <div class="meat-panel-remaining">
+                                Remaining: <span id="sausage-remaining">20 lb</span>
+                            </div>
+                        </div>
+                        <div class="meat-img">
+                            <img src="/img/sausage.png" alt="Sausage">
+                        </div>
+                        <div class="order-meat" data-meat="sausage">
+                            <div class="plus-sign">+</div><div class="sausage-ordered"></div> <div class="minus-sign">-</div> 
+                        </div>
+                    </div>
+                    <div id="wing" class="inventory-panel">
+                        <div class="meat-panel-title">
+                            <h2>Chicken Wing</h2>
+                            <span id="wing-price" class="meat-panel-price-per-lb">$2.50/lb</span>
+                            <div class="meat-panel-available">
+                                Available: <span id="wing-available">20 lb</span>
+                            </div>
+                            <div class="meat-panel-remaining">
+                                Remaining: <span id="wing-remaining">20 lb</span>
+                            </div>
+                        </div>
+                        <div class="meat-img">
+                            <img src="/img/wing.png" alt="Wing">
+                        </div>
+                        <div class="order-meat" data-meat="wing">
+                            <div class="plus-sign">+</div><div class="wing-ordered"></div> <div class="minus-sign">-</div> 
+                        </div>
+                    </div>
+                    <div id="thigh" class="inventory-panel">
+                        <div class="meat-panel-title">
+                            <h2>Chicken Thigh</h2>
+                            <span id="thigh-price" class="meat-panel-price-per-lb">$2.50/lb</span>
+                            <div class="meat-panel-available">
+                                Available: <span id="thigh-available">20 lb</span>
+                            </div>
+                            <div class="meat-panel-remaining">
+                                Remaining: <span id="thigh-remaining">20 lb</span>
+                            </div>
+                        </div>
+                        <div class="meat-img">
+                            <img src="/img/thigh.png" alt="Thigh">
+                        </div>
+                        <div class="order-meat" data-meat="thigh">
+                            <div class="plus-sign">+</div><div class="thigh-ordered"></div> <div class="minus-sign">-</div> 
+                        </div>
+                    </div>    
+                    <div id="steak" class="inventory-panel">
+                        <div class="meat-panel-title">
+                            <h2>Steak</h2>
+                            <span id="steak-price" class="meat-panel-price-per-lb">$2.50/lb</span>
+                            <div class="meat-panel-available">
+                                Available: <span id="steak-available">20 lb</span>
+                            </div>
+                            <div class="meat-panel-remaining">
+                                Remaining: <span id="steak-remaining">20 lb</span>
+                            </div>
+                        </div>
+                        <div class="meat-img">
+                            <img src="/img/steak.png" alt="Steak">
+                        </div>
+                        <div class="order-meat" data-meat="steak">
+                            <div class="plus-sign">+</div><div class="steak-ordered"></div> <div class="minus-sign">-</div> 
+                        </div>
+                    </div>   
                 </div>
             </div>
-            
-        </div>
-
-        <div class="inventory-column">
-            <div class="text-panels-container">
-                <div id="patty" class="inventory-panel">
-                    <div class="meat-panel-title">
-                        <h2>Patty</h2>
-                        <span id="patty-price" class="meat-panel-price-per-lb">$2.50/lb</span>
-                        <div class="meat-panel-available">
-                            Available: <span id="patty-available">20 lb</span>
+        </main>
+    
+        <footer class="mobile-summary">
+            <div class="summary-column">
+                <div class="text-panels-container">
+                    <h2>Order Summary</h2>
+                    <div class="meat-summary-list">
+                            <div class="meat-summary-item" id="summary-patty">
+                                <img src="/img/patty.png" alt="Patty"> <span id="summary-patty-ordered"> </span> 
+                            </div>
+                            <div class="meat-summary-item" id="summary-sausage">
+                                <img src="/img/sausage.png" alt="Sausage" > <span id="summary-sausage-ordered"> $5.89 , 3 lbs</span>
+                            </div>
+                            <div class="meat-summary-item" id="summary-wing">
+                                <img src="/img/wing.png" alt="Chicken Wing"> <span id="summary-wing-ordered"> $5.89 , 3 lbs</span>
+                            </div>
+                            <div class="meat-summary-item" id="summary-thigh">
+                                <img src="/img/thigh.png" alt="Chicken Thigh"> <span id="summary-thigh-ordered"> $5.89 , 3 lbs</span>
+                            </div>
+                            <div class="meat-summary-item" id="summary-steak">
+                                <img src="/img/steak.png" alt="Steak"> <span id="summary-steak-ordered">$5.89 , 3 lbs</span>
+                            </div>
+                    </div>
+                        <div class="total-summaries">
+                            <div class="total-amount-sold">
+                                <div class="summary-text">Sold</div> <div class="summary-value" id="total-amount">$0.00</div>
+                            </div>
+                            <div class="total-value-sold">
+                                <div class="summary-text">Sold (lbs)</div> <div class="summary-value" id="total-value">34 lbs</div>    
+                            </div>
+                            <div class="total-value-remaining">
+                                <div class="summary-text">Remaining</div><div class="summary-value" id="total-remaining">94 lbs </div>
+                            </div>
                         </div>
-                        <div class="meat-panel-remaining">
-                            Remaining: <span id="patty-remaining"></span>
-                        </div>
-                    </div>
-                    <div class="meat-img">
-                        <img src="/img/patty.png" alt="Patty">
-                    </div>
-                    <div class="order-meat" data-meat="patty">
-                        <div class="plus-sign">+</div><div class="patty-ordered"></div> <div class="minus-sign">-</div> 
-                    </div>
                 </div>
-                <div id="sausage" class="inventory-panel">
-                    <div class="meat-panel-title">
-                        <h2>Sausage</h2>
-                        <span id="sausage-price" class="meat-panel-price-per-lb">$2.50/lb</span>
-                        <div class="meat-panel-available">
-                            Available: <span id="sausage-available">20 lb</span>
-                        </div>
-                        <div class="meat-panel-remaining">
-                            Remaining: <span id="sausage-remaining">20 lb</span>
-                        </div>
-                    </div>
-                    <div class="meat-img">
-                        <img src="/img/sausage.png" alt="Sausage">
-                    </div>
-                    <div class="order-meat" data-meat="sausage">
-                        <div class="plus-sign">+</div><div class="sausage-ordered"></div> <div class="minus-sign">-</div> 
-                    </div>
-                </div>
-                <div id="wing" class="inventory-panel">
-                    <div class="meat-panel-title">
-                        <h2>Chicken Wing</h2>
-                        <span id="wing-price" class="meat-panel-price-per-lb">$2.50/lb</span>
-                        <div class="meat-panel-available">
-                            Available: <span id="wing-available">20 lb</span>
-                        </div>
-                        <div class="meat-panel-remaining">
-                            Remaining: <span id="wing-remaining">20 lb</span>
-                        </div>
-                    </div>
-                    <div class="meat-img">
-                        <img src="/img/wing.png" alt="Wing">
-                    </div>
-                    <div class="order-meat" data-meat="wing">
-                        <div class="plus-sign">+</div><div class="wing-ordered"></div> <div class="minus-sign">-</div> 
-                    </div>
-                </div>
-                <div id="thigh" class="inventory-panel">
-                    <div class="meat-panel-title">
-                        <h2>Chicken Thigh</h2>
-                        <span id="thigh-price" class="meat-panel-price-per-lb">$2.50/lb</span>
-                        <div class="meat-panel-available">
-                            Available: <span id="thigh-available">20 lb</span>
-                        </div>
-                        <div class="meat-panel-remaining">
-                            Remaining: <span id="thigh-remaining">20 lb</span>
-                        </div>
-                    </div>
-                    <div class="meat-img">
-                        <img src="/img/thigh.png" alt="Thigh">
-                    </div>
-                    <div class="order-meat" data-meat="thigh">
-                        <div class="plus-sign">+</div><div class="thigh-ordered"></div> <div class="minus-sign">-</div> 
-                    </div>
-                </div>    
-                <div id="steak" class="inventory-panel">
-                    <div class="meat-panel-title">
-                        <h2>Steak</h2>
-                        <span id="steak-price" class="meat-panel-price-per-lb">$2.50/lb</span>
-                        <div class="meat-panel-available">
-                            Available: <span id="steak-available">20 lb</span>
-                        </div>
-                        <div class="meat-panel-remaining">
-                            Remaining: <span id="steak-remaining">20 lb</span>
-                        </div>
-                    </div>
-                    <div class="meat-img">
-                        <img src="/img/steak.png" alt="Steak">
-                    </div>
-                    <div class="order-meat" data-meat="steak">
-                        <div class="plus-sign">+</div><div class="steak-ordered"></div> <div class="minus-sign">-</div> 
-                    </div>
-                </div>   
             </div>
-        </div>
-
-
-        <div class="meat-column">
-            <div class="text-panels-container">
-                   <h2>Order Summary</h2>
-                   <div class="meat-summary-list">
-                          <div class="meat-summary-item" id="summary-patty">
-                            <img src="/img/patty.png" alt="Patty"> <span id="summary-patty-ordered"> </span> 
-                          </div>
-                          <div class="meat-summary-item" id="summary-sausage">
-                            <img src="/img/sausage.png" alt="Sausage" > <span id="summary-sausage-ordered"> $5.89 , 3 lbs</span>
-                          </div>
-                          <div class="meat-summary-item" id="summary-wing">
-                            <img src="/img/wing.png" alt="Chicken Wing"> <span id="summary-wing-ordered"> $5.89 , 3 lbs</span>
-                          </div>
-                          <div class="meat-summary-item" id="summary-thigh">
-                            <img src="/img/thigh.png" alt="Chicken Thigh"> <span id="summary-thigh-ordered"> $5.89 , 3 lbs</span>
-                          </div>
-                          <div class="meat-summary-item" id="summary-steak">
-                            <img src="/img/steak.png" alt="Steak"> <span id="summary-steak-ordered">$5.89 , 3 lbs</span>
-                          </div>
-                   </div>
-                    <div class="total-summaries">
-                        <div class="total-amount-sold">
-                            <div class="summary-text"> Total $ Sold: </div> <div class="summary-value" id="total-amount">$0.00</div>
-                        </div>
-                        <div class="total-value-sold">
-                            <div class="summary-text"> Total Value Sold: </div> <div class="summary-value" id="total-value">34 lbs</div>    
-                        </div>
-                        <div class="total-value-remaining">
-                            <div class="summary-text"> Total Value Remaining: </div><div class="summary-value" id="total-remaining">94 lbs </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
+        </footer>
+    
     </div>
     <div class="success-panel">
         <h2>Congratulations!</h2>
