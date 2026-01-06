@@ -1,5 +1,5 @@
 // random helpers
-import { MEATS, state, generateRandomSellPlan } from './gameState.js';
+import { MEATS, state, generateRandomSellPlan, derivedState, evaluateRequests } from './gameState.js';
 import { updateUI, initializePrices } from './ui.js';
 import { generateRequest, applySyncFeasibilityClamp } from './requests.js';
 
@@ -118,11 +118,25 @@ function generateRoundRequests(state, tier = "easy") {
 // }
 
 export function startNewRound(tier = "easy") {
-    randomizePrices(state.round.prices);
-    randomizeInventory(state.round.inventory);
-
-    resetPlan(state.plan, state.round.inventory);
-    state.round.requests = generateRoundRequests(state, tier);
+    let validRound = false;
+    let attempts = 0;
+    const maxAttempts = 100; // prevent infinite loop
+    
+    do {
+        randomizePrices(state.round.prices);
+        randomizeInventory(state.round.inventory);
+        resetPlan(state.plan, state.round.inventory);
+        state.round.requests = generateRoundRequests(state, tier);
+        
+        // Check if at least 2 requests are unmet
+        const derived = derivedState(state);
+        const results = evaluateRequests(state, derived);
+        const unmetCount = Object.values(results).filter(met => met === false).length;
+        validRound = unmetCount >= 2;
+        
+        attempts++;
+    } while (!validRound && attempts < maxAttempts);
+    
     state.roundNumber += 1;
     initializePrices();
     updateUI();
