@@ -1,5 +1,73 @@
 // filepath: src/ui.js
 import { MEATS, state, remainingMeat, derivedState, evaluateRequests } from './gameState.js';
+import {OPS, METRICS, SCOPES } from "./requests.js"; // if same file, remove import
+
+
+function meatLabel(meat) {
+  // Simple label mapping; improve later
+  const labels = { patty: "patty", sausage: "sausage", wing: "wings", thigh: "thighs", steak: "steak" };
+  return labels[meat] ?? meat;
+}
+
+function fmtMoney(n) {
+  return `$${Number(n).toFixed(2)}`;
+}
+
+function fmtLbs(n) {
+  return `${Number(n)} lb`;
+}
+
+export function requestToText(req) {
+  const isMoney = req.metric === METRICS.SOLD_VALUE || req.metric === METRICS.REMAINING_VALUE;
+  const unit = isMoney ? fmtMoney : fmtLbs;
+
+  const metricPhrase = (() => {
+    if (req.metric === METRICS.SOLD_VALUE) return "sell";
+    if (req.metric === METRICS.SOLD_WEIGHT) return "sell";
+    if (req.metric === METRICS.REMAINING_VALUE) return "keep";
+    if (req.metric === METRICS.REMAINING_WEIGHT) return "keep";
+    return "do";
+  })();
+
+  const scopePhrase = (() => {
+    if (req.scope === SCOPES.TOTAL) return "total";
+    if (req.scope === SCOPES.MEAT) return meatLabel(req.meat);
+    if (req.scope === SCOPES.GROUP) return "selected meats";
+    return "";
+  })();
+
+  const constraintPhrase = (() => {
+    switch (req.op) {
+      case OPS.GTE:
+        return `at least ${unit(req.target)}`;
+      case OPS.LTE:
+        return `at most ${unit(req.target)}`;
+      case OPS.RANGE:
+        return `between ${unit(req.min)} and ${unit(req.max)}`;
+      case OPS.EQ: {
+        const tol = req.tolerance ?? 0;
+        return tol > 0
+          ? `about ${unit(req.target)} (± ${unit(tol)})`
+          : `exactly ${unit(req.target)}`;
+      }
+      default:
+        return "";
+    }
+  })();
+
+  if (req.metric === METRICS.SOLD_WEIGHT || req.metric === METRICS.SOLD_VALUE) {
+    // Selling
+    return req.scope === SCOPES.MEAT
+      ? `Sell ${constraintPhrase} of ${scopePhrase}.`
+      : `Sell ${constraintPhrase} ${scopePhrase}.`;
+  } else {
+    // Keeping (remaining)
+    return req.scope === SCOPES.MEAT
+      ? `Keep ${constraintPhrase} of ${scopePhrase}.`
+      : `Keep ${constraintPhrase} ${scopePhrase}.`;
+  }
+}
+
 
 export function updateUI() {
     const derived = derivedState(state);
@@ -63,6 +131,10 @@ function updatePersonaPanels(requestResults) {
         if (panel) {
             panel.className = `persona-panel ${requestResults[persona] ? 'met' : 'unmet'}`;
         }
+        // Update the <p> text from the request object
+        const req = state.round.requests.find(r => r.persona === persona);
+        const p = panel.querySelector("p");
+        if (req && p) p.textContent = requestToText(req);
     }
 
     // Show success panel if all requests are met

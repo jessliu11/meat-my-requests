@@ -5,6 +5,7 @@ import { initializePrices, updateUI } from './ui.js';
 import { changeSell } from './gameLogic.js';
 import { startNewRound } from './startNewRound.js';
 
+let currentDifficulty = "easy";
 // Initialize prices
 initializePrices();
 
@@ -26,10 +27,21 @@ inventoryColumn.addEventListener("click", (event) => {
     const delta = clickedPlus ? 1 : -1;
     changeSell(meat, delta);
 });
+//read dropdown for difficulty selection
+const difficultySelect = document.getElementById("difficulty-select");
+if (difficultySelect) {
+  currentDifficulty = difficultySelect.value;
+
+  difficultySelect.addEventListener("change", (e) => {
+    currentDifficulty = e.target.value;
+    console.log("Difficulty set to:", currentDifficulty);
+  });
+}
+
 
 // restart button listener
 document.getElementById('restart-button').addEventListener('click',()=>{
-    startNewRound();
+    startNewRound(currentDifficulty);
 
     // close success panel
     const successPanel = document.querySelector('.success-panel');
@@ -37,6 +49,10 @@ document.getElementById('restart-button').addEventListener('click',()=>{
         successPanel.style.display = 'none';
     }
 })
+
+window.addEventListener("DOMContentLoaded", () => {
+  startNewRound(currentDifficulty);
+});
 
 // Initial UI update
 updateUI();

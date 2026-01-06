@@ -1,5 +1,16 @@
 // filepath: src/gameState.js
+import {OPS, METRICS, SCOPES } from "./requests.js"; // if same file, remove import
+
 export const MEATS = ["patty", "sausage", "wing", "thigh", "steak"];
+
+export function generateRandomSellPlan(inventory) {
+    const sell = {};
+    for (const meat of MEATS) {
+        const maxAmount = inventory[meat];
+        sell[meat] = Math.floor(Math.random() * (maxAmount + 1));
+    }
+    return sell;
+}
 
 export const initialState = {
     round: {
@@ -20,20 +31,26 @@ export const initialState = {
         requests: [
             {
                 persona: "manager",
-                type: "SELL_TOTAL_VALUE_AT_LEAST",
-                target: 30 // dollars
+                scope: "TOTAL",
+                metric: "SOLD_VALUE",
+                op: "GTE",
+                target: 30
             },
             {
                 persona: "customer",
-                type: "SELL_MEAT_WEIGHT_AT_LEAST",
+                scope: "MEAT",
+                metric: "SOLD_WEIGHT",
+                op: "GTE",
                 meat: "wing",
-                target: 5 // pounds
+                target: 5
             },
             {
                 persona: "chef",
-                type: "KEEP_MEAT_WEIGHT_AT_LEAST",
+                scope: "MEAT",
+                metric: "REMAINING_WEIGHT",
+                op: "GTE",
                 meat: "steak",
-                target: 2 // pounds
+                target: 2
             }
         ]
     },
@@ -49,7 +66,8 @@ export const initialState = {
     }
 };
 
-export let state = { ...initialState };
+export let state = JSON.parse(JSON.stringify(initialState));
+state.plan.sell = generateRandomSellPlan(state.round.inventory);
 
 export function setSell(meat, newValue) {
     const available = state.round.inventory[meat];
@@ -100,25 +118,93 @@ export function derivedState(state) {
 }
 
 
-export function evaluateRequests(state, derived) {
-    const results = {};
+// export function evaluateRequests(state, derived) {
+//     const results = {};
 
-    for (const request of state.round.requests){ 
-        let met = false;
-        switch(request.type){
-            case "SELL_TOTAL_VALUE_AT_LEAST":
-                met = derived.totalRevenueSold >= request.target;
-                break;
-            case "SELL_MEAT_WEIGHT_AT_LEAST":
-                met = state.plan.sell[request.meat] >= request.target;
-                break;
-            case "KEEP_MEAT_WEIGHT_AT_LEAST":
-                met = derived.byMeat[request.meat].remainingPounds >= request.target;
-                break;
-            default:
-                met = false;
-        }
-        results[request.persona] = met; 
+//     for (const request of state.round.requests){ 
+//         let met = false;
+//         switch(request.type){
+//             case "SELL_TOTAL_VALUE_AT_LEAST":
+//                 met = derived.totalRevenueSold >= request.target;
+//                 break;
+//             case "SELL_MEAT_WEIGHT_AT_LEAST":
+//                 met = state.plan.sell[request.meat] >= request.target;
+//                 break;
+//             case "KEEP_MEAT_WEIGHT_AT_LEAST":
+//                 met = derived.byMeat[request.meat].remainingPounds >= request.target;
+//                 break;
+//             default:
+//                 met = false;
+//         }
+//         results[request.persona] = met; 
+//     }
+//     return results;
+// }
+
+function getMetricValueForMeat(derived, meat, metric) {
+  const m = derived.byMeat[meat];
+  if (!m) return NaN;
+
+  switch (metric) {
+    case METRICS.SOLD_WEIGHT: return m.soldPounds;
+    case METRICS.SOLD_VALUE: return m.revenueSold;
+    case METRICS.REMAINING_WEIGHT: return m.remainingPounds;
+    case METRICS.REMAINING_VALUE: return m.remainingValue;
+    default: return NaN;
+  }
+}
+
+function getMetricValueTotal(derived, metric) {
+  switch (metric) {
+    case METRICS.SOLD_WEIGHT: return derived.totalPoundsSold;
+    case METRICS.SOLD_VALUE: return derived.totalRevenueSold;
+    case METRICS.REMAINING_WEIGHT: return derived.totalRemainingPounds;
+    case METRICS.REMAINING_VALUE: return derived.totalRemainingValue;
+    default: return NaN;
+  }
+}
+
+function isMetByOp(current, request) {
+  if (Number.isNaN(current)) return false;
+
+  switch (request.op) {
+    case OPS.GTE:
+      return current >= request.target;
+
+    case OPS.LTE:
+      return current <= request.target;
+
+    case OPS.RANGE:
+      return current >= request.min && current <= request.max;
+
+    case OPS.EQ: {
+      const tol = request.tolerance ?? 0;
+      return Math.abs(current - request.target) <= tol;
     }
-    return results;
+
+    default:
+      return false;
+  }
+}
+
+export function evaluateRequests(state, derived) {
+  const results = {};
+
+  for (const request of state.round.requests) {
+    let current = NaN;
+
+    if (request.scope === SCOPES.TOTAL) {
+      current = getMetricValueTotal(derived, request.metric);
+    } else if (request.scope === SCOPES.MEAT) {
+      current = getMetricValueForMeat(derived, request.meat, request.metric);
+    } else if (request.scope === SCOPES.GROUP) {
+      // Optional future: sum across group meats
+      const meats = request.meats ?? [];
+      current = meats.reduce((sum, meat) => sum + getMetricValueForMeat(derived, meat, request.metric), 0);
+    }
+
+    results[request.persona] = isMetByOp(current, request);
+  }
+
+  return results;
 }
