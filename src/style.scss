@@ -34,15 +34,16 @@ h2{
 
 #playButton {
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 20;
-  background-color: #4CAF50;
+  background-color: #3facac;
   color: white;
   border: none;
   padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
+  font-size: 24px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -428,7 +429,7 @@ h2{
     flex: 1 1 auto;
     height: auto;
     overflow-y: auto;
-    padding: 8px 12px 12px;
+    //padding: 8px 8px 8px;
   }
 
   // stick summary to bottom
