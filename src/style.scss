@@ -420,6 +420,7 @@ h2{
     transform: none;
     margin: 0;
     padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   // personas at the top
@@ -447,6 +448,7 @@ h2{
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0 8px;
+    padding-bottom: 8px;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -460,6 +462,7 @@ h2{
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(0,0,0,0.08);
     padding: 8px 8px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
     margin-bottom: 0;
     z-index: 20;
   }
@@ -650,7 +653,7 @@ h2{
   }
 
   .mobile-summary .meat-summary-item {
-    flex: 0 0 calc(20% - 3px);
+    flex: 0 0 calc(40% - 3px);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -659,7 +662,7 @@ h2{
     background: rgba(0,0,0,0.03);
     border-radius: 8px;
     font-size: 11px;
-    max-width: calc(20% - 3px);
+    max-width: calc(40% - 3px);
 
     img {
       width: 32px;
