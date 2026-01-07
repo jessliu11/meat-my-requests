@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  -webkit-overflow-scrolling: touch;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   
@@ -49,7 +57,7 @@ h2{
 
 #app{
   height: 90vh;
-  width: 80vw;
+  width: 90vw;
   overflow: hidden;
   display: flex;
   flex-direction: row;
@@ -66,8 +74,8 @@ h2{
   border-width: 2px;
   border-style: solid;
   border-radius: 20px;
-  margin: 0 10px;
-  padding: 10px;
+  margin: 0 5px;
+  padding: 8px;
   border-color: rgb(148, 148, 148);
   flex: 1;
   display: flex;
@@ -76,8 +84,8 @@ h2{
 }
 
 .inventory-column {
-  margin: 0 10px;
-  padding: 10px;
+  margin: 0 5px;
+  padding: 8px;
   flex: 2;
   display: flex;
   flex-direction: column;
@@ -402,15 +410,23 @@ h2{
   #app {
     display: flex;
     flex-direction: column;
+    height: 100dvh;
     height: 100vh;
+    width: 100vw;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin: 0;
+    padding: 0;
   }
 
   // personas at the top
   .mobile-personas {
     flex: 0 0 auto;
     height: auto;
-    padding: 12px 12px 6px;
+    padding: 8px 8px 4px;
     background: transparent;
     overflow: hidden;
     
@@ -418,7 +434,7 @@ h2{
 
   .persona-column {
     border: none;
-    margin-top: 50px;
+    margin: 0;
     padding: 0;
     overflow: hidden;
     height: auto;
@@ -429,7 +445,9 @@ h2{
     flex: 1 1 auto;
     height: auto;
     overflow-y: auto;
-    //padding: 8px 8px 8px;
+    overflow-x: hidden;
+    padding: 0 8px;
+    -webkit-overflow-scrolling: touch;
   }
 
   // stick summary to bottom
@@ -441,8 +459,8 @@ h2{
     background: rgba(255,255,255,0.95);
     backdrop-filter: blur(8px);
     border-top: 1px solid rgba(0,0,0,0.08);
-    padding: 10px 12px;
-    margin-bottom: 70px;
+    padding: 8px 8px;
+    margin-bottom: 0;
     z-index: 20;
   }
 }
@@ -466,12 +484,12 @@ h2{
   }
 
   .mobile-personas .persona-panel {
-    flex: 0 0 calc(100% - 24px);
+    flex: 0 0 calc(100% - 16px);
     scroll-snap-align: center;
     border-radius: 14px;
-    padding: 14px;
-    min-height: 140px;
-    min-width: calc(100% - 24px);
+    padding: 12px;
+    min-height: 120px;
+    min-width: calc(100% - 16px);
   }
 }
 
@@ -484,12 +502,12 @@ h2{
     grid-template-areas: 
       "title image controls"
       "title image controls";
-    gap: 12px;
+    gap: 10px;
     align-items: center;
     border: 2px solid rgba(0,0,0,0.12);
     border-radius: 14px;
-    padding: 12px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 8px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.04);
   }
@@ -500,7 +518,7 @@ h2{
     flex-direction: column;
     gap: 4px;
     line-height: 1.2;
-    padding-right: 8px;
+    padding-right: 18px;
 
     h2 {
       font-weight: 700;
@@ -571,10 +589,11 @@ h2{
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-right: 50px;
 
     img {
-      width: 64px;
-      height: 64px;
+      width: 100px;
+      height: 100px;
       object-fit: contain;
       border-radius: 12px;
       background: rgba(0,0,0,0.03);
@@ -631,28 +650,29 @@ h2{
   }
 
   .mobile-summary .meat-summary-item {
-    flex: 0 0 calc(50% - 3px);
+    flex: 0 0 calc(20% - 3px);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    gap: 3px;
+    gap: 8px;
     padding: 6px 8px;
     background: rgba(0,0,0,0.03);
     border-radius: 8px;
     font-size: 11px;
-    max-width: calc(50% - 3px);
+    max-width: calc(20% - 3px);
 
     img {
       width: 32px;
       height: 32px;
       margin: 0;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     span {
       font-size: 10px;
       font-weight: 600;
-      text-align: center;
+      text-align: left;
       line-height: 1.2;
       color: rgba(0,0,0,0.7);
     }
