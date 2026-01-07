@@ -118,29 +118,6 @@ export function derivedState(state) {
 }
 
 
-// export function evaluateRequests(state, derived) {
-//     const results = {};
-
-//     for (const request of state.round.requests){ 
-//         let met = false;
-//         switch(request.type){
-//             case "SELL_TOTAL_VALUE_AT_LEAST":
-//                 met = derived.totalRevenueSold >= request.target;
-//                 break;
-//             case "SELL_MEAT_WEIGHT_AT_LEAST":
-//                 met = state.plan.sell[request.meat] >= request.target;
-//                 break;
-//             case "KEEP_MEAT_WEIGHT_AT_LEAST":
-//                 met = derived.byMeat[request.meat].remainingPounds >= request.target;
-//                 break;
-//             default:
-//                 met = false;
-//         }
-//         results[request.persona] = met; 
-//     }
-//     return results;
-// }
-
 function getMetricValueForMeat(derived, meat, metric) {
   const m = derived.byMeat[meat];
   if (!m) return NaN;

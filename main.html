@@ -145,38 +145,26 @@
                                 <img src="/img/steak.png" alt="Steak"> <span id="summary-steak-ordered">$5.89 , 3 lbs</span>
                             </div>
                     </div>
-                        <div class="total-summaries">
-                            <div class="total-amount-sold">
-                                <div class="summary-text">Sold</div> <div class="summary-value" id="total-amount">$0.00</div>
-                            </div>
-                            <div class="total-value-sold">
-                                <div class="summary-text">Sold (lbs)</div> <div class="summary-value" id="total-value">34 lbs</div>    
-                            </div>
-                            <div class="total-value-remaining">
-                                <div class="summary-text">Remaining</div><div class="summary-value" id="total-remaining">94 lbs </div>
-                            </div>
+                    <div class="total-summaries">
+                        <div class="total-amount-sold">
+                            <div class="summary-text">Sold</div> <div class="summary-value" id="total-amount">$0.00</div>
                         </div>
+                        <div class="total-value-sold">
+                            <div class="summary-text">Sold (lbs)</div> <div class="summary-value" id="total-value">34 lbs</div>    
+                        </div>
+                        <div class="total-value-remaining">
+                            <div class="summary-text">Remaining</div><div class="summary-value" id="total-remaining">94 lbs </div>
+                        </div>
+                    </div>
+                    <div id="action-area" class="action-area">
+                        <button id="submit-order-button">Submit Order</button>
+                    </div>
+
+                    
                 </div>
-            </div>
         </footer>
     
     </div>
-    <div class="success-panel">
-        <h2>Congratulations!</h2>
-        <p>You have successfully met all the requirements!</p>
-
-        <label for="difficulty-select" style="display:block; margin: 12px 0 6px;">
-            Next Round Difficulty
-        </label>
-        <select id="difficulty-select">
-            <option value="easy" selected>Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-        </select>
-
-        <button id="restart-button" style="margin-top: 12px;">Restart</button>
-    </div>
-      
 
     <div id="experience">
       <canvas id="experience-canvas" class="experience-canvas"></canvas>

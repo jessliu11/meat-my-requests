@@ -71,7 +71,6 @@ export function requestToText(req) {
 
 export function updateUI() {
     const derived = derivedState(state);
-    const requestResults = evaluateRequests(state, derived)
 
     updatePersonaRequests(state.round.requests);
 
@@ -92,8 +91,9 @@ export function updateUI() {
         }
     }
 
-    // update persona panels
-    updatePersonaPanels(requestResults);
+    // Don't update persona panel colors during gameplay
+    // Only update text
+    updatePersonaPanelText();
     //update order summary
     updateOrderSummary(derived);
 }
@@ -124,24 +124,31 @@ function formatRequestText(request) {
             return "New request available.";
     }
 }
-function updatePersonaPanels(requestResults) {
+
+
+function updatePersonaPanelText() {
+    const personas = ['manager', 'customer', 'chef'];
+    for (const persona of personas) {
+        const panel = document.getElementById(`${persona}-panel`);
+        if (!panel) continue;
+        
+        // Reset to default unmet state (static color)
+        panel.className = 'persona-panel unmet';
+        
+        // Update the <p> text from the request object
+        const req = state.round.requests.find(r => r.persona === persona);
+        const p = panel.querySelector("p");
+        if (req && p) p.textContent = requestToText(req);
+    }
+}
+
+export function updatePersonaPanels(requestResults) {
     const personas = ['manager', 'customer', 'chef'];
     for (const persona of personas) {
         const panel = document.getElementById(`${persona}-panel`);
         if (panel) {
             panel.className = `persona-panel ${requestResults[persona] ? 'met' : 'unmet'}`;
         }
-        // Update the <p> text from the request object
-        const req = state.round.requests.find(r => r.persona === persona);
-        const p = panel.querySelector("p");
-        if (req && p) p.textContent = requestToText(req);
-    }
-
-    // Show success panel if all requests are met
-    const allMet = personas.every(persona => requestResults[persona]);
-    const successPanel = document.querySelector('.success-panel');
-    if (successPanel) {
-        successPanel.style.display = allMet ? 'block' : 'none';
     }
 }
 
