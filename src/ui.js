@@ -20,6 +20,7 @@ function fmtLbs(n) {
 export function requestToText(req) {
   const isMoney = req.metric === METRICS.SOLD_VALUE || req.metric === METRICS.REMAINING_VALUE;
   const unit = isMoney ? fmtMoney : fmtLbs;
+  const isCustomer = req.persona === 'customer';
 
   const metricPhrase = (() => {
     if (req.metric === METRICS.SOLD_VALUE) return "sell";
@@ -57,6 +58,11 @@ export function requestToText(req) {
 
   if (req.metric === METRICS.SOLD_WEIGHT || req.metric === METRICS.SOLD_VALUE) {
     // Selling
+    if (isCustomer) {
+      return req.scope === SCOPES.MEAT
+        ? `I want to buy ${constraintPhrase} of ${scopePhrase}.`
+        : `I want to buy ${constraintPhrase} ${scopePhrase}.`;
+    }
     return req.scope === SCOPES.MEAT
       ? `Sell ${constraintPhrase} of ${scopePhrase}.`
       : `Sell ${constraintPhrase} ${scopePhrase}.`;
